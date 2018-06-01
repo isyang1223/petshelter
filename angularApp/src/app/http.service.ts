@@ -8,7 +8,9 @@ export class HttpService {
   constructor(private _http: HttpClient) { }
 
   addPet(newPet){
-    
+    console.log("<> http.service.ts <>")
+    console.log("## addPet ##")
+   
     return this._http.post('/new', newPet)
   }
   getPets(){
@@ -21,7 +23,8 @@ export class HttpService {
   }
   savePet(editPet){
     this.pet = editPet
-    console.log("12341245r365246236", this.pet)
+    console.log("12341245r365246236", this.pet.error)
+    
     return this._http.put('/pets/edit/' + this.pet._id, this.pet)
   }
   likePet(pet){
@@ -35,6 +38,9 @@ export class HttpService {
   deletePet(pet){
     return this._http.delete('/pets/remove/' + pet._id)
   }
+  // upload(selectedFile){
+  //   return this._http.post('/upload', selectedFile)
+  // }
 
 
 }

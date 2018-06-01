@@ -3,10 +3,13 @@
 
 
 
-<a [routerLink]="['']">Home</a>
-<h4>Details about {{ pet.name }}</h4>
+<button class="btn btn-primary homebutton">
+    <a [routerLink]="['']">Home</a>
+</button>
+<h3>Details about {{ pet.name }}</h3>
+<img src="{{ pet.profileImage }}">
 
-<p>Pet type: {{ pet.type }}</p>
+<p>{{ pet.name }} is a {{ pet.type }}</p>
 <p>Description: {{ pet.desc }}</p>
 
 <p *ngIf="(pet.skill1)">Skills: {{ pet.skill1 }}</p>
@@ -16,8 +19,7 @@
 <p>Likes: {{ pet.like }}</p>
 
 
-<button (click)="likePet(pet)" [disabled]='clicked'>Like this pet</button>
+<button class="btn btn-primary" (click)="likePet(pet)" [disabled]='clicked'>Like this pet</button>
 
-<button (click)="deletePet(pet)">Adopt this pet!</button>
-
+<button class="btn btn-primary" (click)="deletePet(pet)">Adopt this pet!</button>
 

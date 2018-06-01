@@ -18,6 +18,7 @@ export class EditpetComponent implements OnInit {
 
   ngOnInit() {
     this.editPet = this._httpService.pet
+    console.log("editPet!!!!!!!!!!!" + this.editPet)
   }
   savePet(){
   
@@ -25,7 +26,8 @@ export class EditpetComponent implements OnInit {
    
     observable.subscribe(data => {
       if ((data as any).message == "Error") {
-        this.error = "Name/Type/Description needs to be at least 3 characters"
+        console.log(data["message"])
+        this.error = "Invalid name or type or description"
 
       }
       else {

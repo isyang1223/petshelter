@@ -1,10 +1,27 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var path = require('path');
+
+
+var multer = require('multer');
+
+
+
+
+// var fileRoutes = require('./routes/file')
 var mongoose = require('mongoose');
 var app = express();
 app.use(express.static(path.join(__dirname, '/angularApp/dist')));
 app.use(bodyParser.json());
+
+
+
+
+// app.use('/file', fileRoutes);
+
+
+
+
 mongoose.connect('mongodb://localhost/beltexam')
 mongoose.Promise = global.Promise;
 
@@ -22,16 +39,74 @@ var PetSchema = new mongoose.Schema({
     skill1: { type: String, default: "" },
     skill2: { type: String, default: "" },
     skill3: { type: String, default: "" },
-    like: {type: Number, default: 0}
+    like: {type: Number, default: 0},
+    profileImage: { type: String }
+    
+
 },
     { timestamps: true });
 
 mongoose.model('Pet', PetSchema);
 var Pet = mongoose.model('Pet')
 
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'angularApp/src/assets/upload')
+    },
+    filename: function (req, file, cb) {
+        cb(null,  Date.now() + file.fieldname + file.originalname)
+    }
+});
+
+var fileFilter = (req,file, cb) => {
+    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+        cb(null, true);
+    } else {    
+        cb(null, false);
+
+    }
+
+
+}
+
+
+var upload = multer({ storage: storage}).single('file');
+
+
+app.use(function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'POST, GET, PATCH, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, content-type, Accept');
+  
+    next();
+});
+
+
+
+
+app.post('/upload', function (req, res, next) {
+    upload(req, res, function (err) {
+        console.log('*************at upload server*************')
+        if (err) {
+            res.json({message: "error"})
+        } 
+        console.log("ITS UPLOADED")
+        return res.json({ message: "Success image uploaded", originalname:req.file.originalname, uploadname:req.file.filename })
+    
+        // Everything went fine
+    })
+})
+
+
+
+
+
+
+
+
 
 app.post('/new', function (req, res) {
-
+    
     console.log("POST DATA", req.body);
     var pet = new Pet();
     pet.name = req.body.name;
@@ -41,6 +116,11 @@ app.post('/new', function (req, res) {
     pet.skill2 = req.body.skill2;
     pet.skill3 = req.body.skill3;
     pet.like = 0
+    pet.profileImage = req.body.profileImage
+   
+
+    
+   
 
     pet.save(function (err) {
         // if there is an error console.log that something went wrong!
@@ -60,15 +140,19 @@ app.post('/new', function (req, res) {
 })
 
 
+
+
 app.get('/pets', function (req, res) {
     Pet.find({}, function (err, pets) {
         if (err) {
+            
             console.log("Returned error", err);
             // respond with JSON
             res.json({ message: "Error", error: err })
         }
         else {
             // respond with JSON
+            console.log(pets)
             res.json({ message: "Success", data: pets })
         }
     })
@@ -188,3 +272,5 @@ app.all("*", (req, res, next) => {
 app.listen(8000, function () {
     console.log("listening on port 8000");
 })
+
+module.exports = app;

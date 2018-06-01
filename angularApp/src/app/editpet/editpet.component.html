@@ -1,28 +1,54 @@
-<a [routerLink]="['']">
-  Home</a>
+<button class="btn btn-primary homebutton">
+  <a [routerLink]="['']">Home</a>
+</button>
 <h3>Edit this pet: {{ editPet.name }}</h3>
+<img src="{{ editPet.profileImage }}">
 <p> {{ pet | json }} </p>
-<p *ngIf="(error)">{{error}}</p>
+<!-- <p *ngIf="(error)">{{error}}</p> -->
 
 
 <form (submit)="savePet()">
+    
+    <label>Pet name:
+      <small *ngIf="!(editPet.name.length > 2)">| enter at least 3 characters</small>
+      <small *ngIf="!(editPet.name.length < 10)">| name over 50 characters</small>
+    </label>
+    <input type="text" class="form-control" name="editPet.name" [(ngModel)]="editPet.name" ng-minlength="3"
+      ng-maxlength="10">
 
-  <p>Pet name:</p>
-  <input type="text" name="editPet.name" [(ngModel)]="editPet.name" />
-  <p>Pet type:</p>
-  <input type="text" name="editPet.type" [(ngModel)]="editPet.type" />
-  <p>Description:</p>
-  <input type="text" name="editPet.desc" [(ngModel)]="editPet.desc" />
-  <hr>
 
-  <p>Skills(Optional):</p>
-  <p>Skill 1:</p>
-  <input type="text" name="editPet.skill1" [(ngModel)]="editPet.skill1" />
-  <p>Skill 2:</p>
-  <input type="text" name="editPet.skill2" [(ngModel)]="editPet.skill2" />
-  <p>Skill 3:</p>
-  <input type="text" name="editPet.skill3" [(ngModel)]="editPet.skill3" />
+    <label>Pet type:
+      <small *ngIf="!(editPet.type.length > 2)">| enter at least 3 characters</small>
+      <small *ngIf="!(editPet.type.length < 10)">| type over 10 characters</small>
+    </label>
+    <input type="text" class="form-control" name="editPet.type" [(ngModel)]="editPet.type" ng-minlength="3"
+      ng-maxlength="10">
+    
+    
+    <label>Description:
+      <small *ngIf="!(editPet.desc.length > 5)">| enter at least 5 characters</small>
+      <small *ngIf="!(editPet.desc.length < 100)">| description over 100 characters</small>
+    </label>
+    <textarea class="form-control" rows="5" name="editPet.desc" [(ngModel)]="editPet.desc" ng-minlength="5"
+      ng-maxlength="100"></textarea>
+    
+    <hr>
+    
+    <label>Skills(Optional):</label>
+    <label>Skill 1:</label>
+    <input type="text" class="form-control" name="editPet.skill1" [(ngModel)]="editPet.skill1" />
+    <label>Skill 2:</label>
+    <input type="text" class="form-control" name="editPet.skill2" [(ngModel)]="editPet.skill2" />
+    <label>Skill 3:</label>
+    <input type="text" class="form-control" name="editPet.skill3" [(ngModel)]="editPet.skill3" />
+    
+    
+    
+    
+    <button class="btn btn-primary formbutton" [routerLink]="['']">Cancel</button>
+    <input type="submit" value="Edit pet" class="btn btn-primary formbutton">
+  </form>
 
-  <input type="submit" value="Edit pet"/>
-</form>
-<button [routerLink]="['']">Cancel</button>
+
+
+

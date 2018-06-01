@@ -14,6 +14,9 @@ import { EditpetComponent } from './editpet/editpet.component';
 import { ShowpetComponent } from './showpet/showpet.component';
 
 
+import { FileUploadModule } from 'ng2-file-upload'
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +29,10 @@ import { ShowpetComponent } from './showpet/showpet.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    FileUploadModule
+    
+    
   ],
   providers: [HttpService],
   bootstrap: [AppComponent]

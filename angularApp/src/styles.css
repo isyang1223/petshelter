@@ -1,1 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
+.newbutton {
+    float: right;
+    margin-top: 20px;
+}
+.newbutton a {
+    color: white
+}
+.header { 
+    display: inline-block;
+
+}
+
+.well {
+    margin-top: 20px;
+}
+.pics {
+    margin-top: 20px;
+    
+}
+
+.homebutton {
+    float: right;
+    margin-top: 10px;
+}
+.homebutton a {
+    color: white
+}
+.formbutton {
+    float: right;
+    margin-top: 10px;
+    margin-left: 10px;
+}

@@ -1,28 +1,107 @@
 
-<a [routerLink]="['']">Home</a>
+<button class="btn btn-primary homebutton"><a [routerLink]="['']">Home</a></button>
 <h3>Know of a pet needing a home?</h3>
 <p> {{ pet | json }} </p>
-  <p *ngIf="(error)">{{error}}</p>
+
 <form (submit)="onSubmit()">
+  <div class="container-fluid">
+    <div class="row header-section">
+      <span>Upload Pet Profile Picture</span>
+    </div>
   
-  <p>Pet name:</p>
-  <input type="text" name="newPet.name" [(ngModel)]="newPet.name" />
-  <p>Pet type:</p>
-  <input type="text" name="newPet.type" [(ngModel)]="newPet.type" />
-  <p>Description:</p>
-  <input type="text" name="newPet.desc" [(ngModel)]="newPet.desc" />
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <div class="row card">
+          <div class="col-sm-12">
+            <h4>Upload Section</h4>
+            <div id="fileSelector">
+              <input type="file" name="fileUplaod" id="fileUpload" multiple ng2FileSelect [uploader]="uploader">
+            </div>
+            <div>
+              <div class="row uploadList" *ngFor="let item of uploader.queue">
+                <div class="col-sm-4">{{item.file.name}}</div>
+                <div class="col-sm-4">
+                  <div class="progress">
+                    <div class="progress-bar bg-success" [ngStyle]="{'width':item.progress+'%'}"></div>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <button type="button" class="btn btn-dark" (click)="item.upload()">Upload</button>
+                  <button type="button" class="btn btn-danger" (click)="item.remove()">Cancel</button>
+                </div>
+              </div>
+            </div>
+  
+          </div>
+        </div>
+  
+  
+      </div>
+  
+    </div>
+  </div>
+
+  <label>Pet name:
+    <small *ngIf="!(newPet.name.length > 2)">| enter at least 3 characters</small>
+    <small *ngIf="!(newPet.name.length < 15)">| name over 15 characters</small>
+  </label>
+  <input type="text" class="form-control" placeholder="Enter pet name" name="newPet.name" [(ngModel)]="newPet.name" ng-minlength="3"
+    ng-maxlength="10">
+
+  <label>Pet type:
+    <small *ngIf="!(newPet.type.length > 2)">| enter at least 3 characters</small>
+    <small *ngIf="!(newPet.type.length < 15)">| type over 15 characters</small>
+  </label>
+  <input type="text" class="form-control" placeholder="Enter pet type" name="newPet.type" [(ngModel)]="newPet.type" ng-minlength="3"
+    ng-maxlength="10">
+
+
+  <label>Description:
+    <small *ngIf="!(newPet.desc.length > 5)">| enter at least 5 characters</small>
+    <small *ngIf="!(newPet.desc.length < 100)">| description over 100 characters</small>
+  </label>
+  <textarea class="form-control"  placeholder="Enter description" rows="5" name="newPet.desc" [(ngModel)]="newPet.desc"
+    ng-minlength="5" ng-maxlength="100"></textarea>
+
   <hr>
 
-  <p>Skills(Optional):</p>
-  <p>Skill 1:</p>
-  <input type="text" name="newPet.skill1" [(ngModel)]="newPet.skill1" />
-  <p>Skill 2:</p>
-  <input type="text" name="newPet.skill2" [(ngModel)]="newPet.skill2" />
-  <p>Skill 3:</p>
-  <input type="text" name="newPet.skill3" [(ngModel)]="newPet.skill3" />
+  <label>Skills(Optional):</label>
+  <label>Skill 1:</label>
+  <input type="text" class="form-control" name="newPet.skill1" [(ngModel)]="newPet.skill1">
+  <label>Skill 2:</label>
+  <input type="text" class="form-control" name="newPet.skill2" [(ngModel)]="newPet.skill2">
+  <label>Skill 3:</label>
+  <input type="text" class="form-control" name="newPet.skill3" [(ngModel)]="newPet.skill3">
 
 
 
-  <input type="submit" value="Add pet" />
+
+
+
+
+
+
+<!-- <img [src]="url" height="200">
+
+<label>Upload a picture</label>
+<input type="file" (change)="onFileSelected($event)" name="profileImage"> -->
+  
+
+
+
+
+
+  <button class="btn btn-primary formbutton" [routerLink]="['']">Cancel</button>
+  <input type="submit" value="Add pet" class="btn btn-primary formbutton">
+  
 </form>
-<button [routerLink]="['']">Cancel</button>
+
+  <!-- <img [src]="url" height="200">
+  
+  <label>Upload a picture</label>
+  <input type="file" (change)="onFileSelected($event)" name="profileImage">
+  <button (click) = "uploadFile()">Upload</button> -->
+
+
+  
