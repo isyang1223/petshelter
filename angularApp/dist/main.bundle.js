@@ -514,7 +514,7 @@ var NewpetComponent = /** @class */ (function () {
         this.uploader.onCompleteItem = function (item, response, status, headers) {
             console.log(_this.uploader);
             _this.attachmentList.push(JSON.parse(response));
-            _this.newPet.profileImage = "../assets/upload/" + _this.attachmentList[0].uploadname;
+            _this.newPet.profileImage = "assets/upload/" + _this.attachmentList[0].uploadname;
             _this.attachmentList = [];
             console.log("*******************");
             console.log(_this.newPet);

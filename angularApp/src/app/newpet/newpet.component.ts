@@ -39,7 +39,7 @@ export class NewpetComponent implements OnInit {
       
 
 
-      this.newPet.profileImage = "../assets/upload/" + this.attachmentList[0].uploadname
+      this.newPet.profileImage = "assets/upload/" + this.attachmentList[0].uploadname
       this.attachmentList = []
       console.log("*******************")
       console.log(this.newPet)
