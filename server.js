@@ -33,15 +33,15 @@ mongoose.Promise = global.Promise;
 
 
 var PetSchema = new mongoose.Schema({
-    name: { type: String, required: [true, "Name needs to be at least 3 characters"], minlength: [3, "Name needs to be at least 3 characters"], unique: [true, "Invalid name"]},
+    name: { type: String, required: [true, "Name needs to be at least 3 characters"], minlength: [3, "Name needs to be at least 3 characters"], unique: [true, "Invalid name"] },
     type: { type: String, required: [true, "Type needs to be at least 3 characters"], minlength: [3, "Type needs to be at least 3 characters"] },
     desc: { type: String, required: [true, "Description needs to be at least 3 characters"], minlength: [3, "Description needs to be at least 3 characters"] },
     skill1: { type: String, default: "" },
     skill2: { type: String, default: "" },
     skill3: { type: String, default: "" },
-    like: {type: Number, default: 0},
+    like: { type: Number, default: 0 },
     profileImage: { type: String }
-    
+
 
 },
     { timestamps: true });
@@ -54,14 +54,14 @@ var storage = multer.diskStorage({
         cb(null, 'angularApp/src/assets/upload')
     },
     filename: function (req, file, cb) {
-        cb(null,  Date.now() + file.fieldname + file.originalname)
+        cb(null, Date.now() + file.fieldname + file.originalname)
     }
 });
 
-var fileFilter = (req,file, cb) => {
+var fileFilter = (req, file, cb) => {
     if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
         cb(null, true);
-    } else {    
+    } else {
         cb(null, false);
 
     }
@@ -70,14 +70,14 @@ var fileFilter = (req,file, cb) => {
 }
 
 
-var upload = multer({ storage: storage}).single('file');
+var upload = multer({ storage: storage }).single('file');
 
 
 app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'POST, GET, PATCH, DELETE, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, content-type, Accept');
-  
+
     next();
 });
 
@@ -88,11 +88,11 @@ app.post('/upload', function (req, res, next) {
     upload(req, res, function (err) {
         console.log('*************at upload server*************')
         if (err) {
-            res.json({message: "error"})
-        } 
+            res.json({ message: "error" })
+        }
         console.log("ITS UPLOADED")
-        return res.json({ message: "Success image uploaded", originalname:req.file.originalname, uploadname:req.file.filename })
-    
+        return res.json({ message: "Success image uploaded", originalname: req.file.originalname, uploadname: req.file.filename })
+
         // Everything went fine
     })
 })
@@ -106,7 +106,7 @@ app.post('/upload', function (req, res, next) {
 
 
 app.post('/new', function (req, res) {
-    
+
     console.log("POST DATA", req.body);
     var pet = new Pet();
     pet.name = req.body.name;
@@ -117,10 +117,10 @@ app.post('/new', function (req, res) {
     pet.skill3 = req.body.skill3;
     pet.like = 0
     pet.profileImage = req.body.profileImage
-   
 
-    
-   
+
+
+
 
     pet.save(function (err) {
         // if there is an error console.log that something went wrong!
@@ -145,7 +145,7 @@ app.post('/new', function (req, res) {
 app.get('/pets', function (req, res) {
     Pet.find({}, function (err, pets) {
         if (err) {
-            
+
             console.log("Returned error", err);
             // respond with JSON
             res.json({ message: "Error", error: err })
@@ -200,9 +200,9 @@ app.put('/pets/up/:pid', function (req, res) {
         if (req.params.pid == pet._id) {
             pet.like += 1
             console.log("it worked2")
-            
-            }
-        
+
+        }
+
         pet.save(function (err) {
 
             if (err) {
@@ -214,7 +214,7 @@ app.put('/pets/up/:pid', function (req, res) {
             else {
                 // respond with JSON
                 console.log("voted UP!!!");
-                res.json({ message: "Success"})
+                res.json({ message: "Success" })
             }
         })
 

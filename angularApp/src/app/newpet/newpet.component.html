@@ -1,5 +1,6 @@
-
-<button class="btn btn-primary homebutton"><a [routerLink]="['']">Home</a></button>
+<button class="btn btn-primary homebutton">
+  <a [routerLink]="['']">Home</a>
+</button>
 <h3>Know of a pet needing a home?</h3>
 <p> {{ pet | json }} </p>
 
@@ -8,7 +9,7 @@
     <div class="row header-section">
       <span>Upload Pet Profile Picture</span>
     </div>
-  
+
     <div class="row">
       <div class="col-md-2"></div>
       <div class="col-md-8">
@@ -32,13 +33,13 @@
                 </div>
               </div>
             </div>
-  
+
           </div>
         </div>
-  
-  
+
+
       </div>
-  
+
     </div>
   </div>
 
@@ -61,8 +62,8 @@
     <small *ngIf="!(newPet.desc.length > 5)">| enter at least 5 characters</small>
     <small *ngIf="!(newPet.desc.length < 100)">| description over 100 characters</small>
   </label>
-  <textarea class="form-control"  placeholder="Enter description" rows="5" name="newPet.desc" [(ngModel)]="newPet.desc"
-    ng-minlength="5" ng-maxlength="100"></textarea>
+  <textarea class="form-control" placeholder="Enter description" rows="5" name="newPet.desc" [(ngModel)]="newPet.desc" ng-minlength="5"
+    ng-maxlength="100"></textarea>
 
   <hr>
 
@@ -82,11 +83,11 @@
 
 
 
-<!-- <img [src]="url" height="200">
+  <!-- <img [src]="url" height="200">
 
 <label>Upload a picture</label>
 <input type="file" (change)="onFileSelected($event)" name="profileImage"> -->
-  
+
 
 
 
@@ -94,14 +95,11 @@
 
   <button class="btn btn-primary formbutton" [routerLink]="['']">Cancel</button>
   <input type="submit" value="Add pet" class="btn btn-primary formbutton">
-  
+
 </form>
 
-  <!-- <img [src]="url" height="200">
+<!-- <img [src]="url" height="200">
   
   <label>Upload a picture</label>
   <input type="file" (change)="onFileSelected($event)" name="profileImage">
   <button (click) = "uploadFile()">Upload</button> -->
-
-
-  

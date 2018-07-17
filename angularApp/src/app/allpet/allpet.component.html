@@ -1,12 +1,12 @@
-<div >
-<h3 class="header">These pets are looking for a home!</h3>
-<button class="btn btn-primary newbutton header">
-  <a [routerLink]="['new']">Add a pet to the shelter</a>
-</button>
+<div>
+  <h3 class="header">These pets are looking for a home!</h3>
+  <button class="btn btn-primary newbutton header" [routerLink]="['new']">
+   Add a pet to the shelter
+  </button>
 </div>
 
-<div class="container pics" >
-<img src="../assets/adopt_pet_header.jpg">
+<div class="container pics">
+  <img src="../assets/adopt_pet_header.jpg">
 
 </div>
 
@@ -17,39 +17,43 @@
       <tr>
         <th>Profile Picture</th>
         <th>
-          <a (click)="sortType('name')" [class.active]="sortBy === 'name'">Name</a>
-        </th> 
-         
-    
+          <a class="sort" (click)="sortType('name')" [class.active]="sortBy === 'name'">Name</a>
+        </th>
+
+
         <th>
-          <a (click)="sortType('type')" [class.active]="sortBy === 'type'">Type</a>
+          <a class="sort" (click)="sortType('type')" [class.active]="sortBy === 'type'">Type</a>
         </th>
         <th>
-          <a (click)="sortType('like')" [class.active]="sortBy === 'like'">Like</a>
+          <a class="sort" (click)="sortType('like')" [class.active]="sortBy === 'like'">Like</a>
         </th>
         <th>
-          <a (click)="sortType('createdAt')" [class.active]="sortBy === 'createdAt'">Created at</a>
+          <a class="sort" (click)="sortType('createdAt')" [class.active]="sortBy === 'createdAt'">Created at</a>
         </th>
         <th>Action</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let pet of pets">
-        <td><img src="{{ pet.profileImage }}"></td>
-        <td><a (click)="showPet(pet)" [routerLink]="['/details/' + pet._id]">{{ pet.name }}</a></td>
+        <td>
+          <img src="{{ pet.profileImage }}">
+        </td>
+        <td>
+          <a (click)="showPet(pet)" [routerLink]="['/details/' + pet._id]">{{ pet.name }}</a>
+        </td>
         <td>{{ pet.type }}</td>
         <td>{{ pet.like }}</td>
         <td>{{ pet.createdAt | date: 'dd/MM/yyyy' }}</td>
         <td>
-          <button (click)="showPet(pet)" [routerLink]="['/details/' + pet._id]">Details</button>
-          
-          <button (click)="showPet(pet)" [routerLink]="['/edit/' + pet._id]">Edit</button>
+          <button type="button" class="btn btn-primary btn-sm" (click)="showPet(pet)" [routerLink]="['/details/' + pet._id]">Details</button>
+
+          <button type="button" class="btn btn-primary btn-sm" (click)="showPet(pet)" [routerLink]="['/edit/' + pet._id]">Edit</button>
 
 
 
         </td>
       </tr>
     </tbody>
-    
+
   </table>
 </div>
