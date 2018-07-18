@@ -502,6 +502,7 @@ var http_1 = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
 var ng2_file_upload_1 = __webpack_require__("./node_modules/ng2-file-upload/index.js");
 var url = "http://localhost:8000/upload";
 var NewpetComponent = /** @class */ (function () {
+    // selectedFile= null;
     function NewpetComponent(_route, _router, _httpService, http) {
         var _this = this;
         this._route = _route;
@@ -510,10 +511,9 @@ var NewpetComponent = /** @class */ (function () {
         this.http = http;
         this.uploader = new ng2_file_upload_1.FileUploader({ url: url });
         this.attachmentList = [];
-        this.selectedFile = null;
         this.uploader.onCompleteItem = function (item, response, status, headers) {
-            console.log(_this.uploader);
-            _this.attachmentList.push(JSON.parse(response));
+            var responsePath = JSON.parse(response);
+            _this.attachmentList.push(responsePath);
             _this.newPet.profileImage = "assets/upload/" + _this.attachmentList[0].uploadname;
             _this.attachmentList = [];
             console.log("*******************");

@@ -25,7 +25,7 @@ export class NewpetComponent implements OnInit {
 
   newPet: any;
   error: any;
-  selectedFile= null;
+  // selectedFile= null;
 
   constructor(
     private _route: ActivatedRoute,
@@ -34,10 +34,11 @@ export class NewpetComponent implements OnInit {
     private http: HttpClient
   ) {
     this.uploader.onCompleteItem = (item:any, response:any, status:any, headers:any) => {
-      console.log(this.uploader)
-      this.attachmentList.push(JSON.parse(response));
+      var responsePath = JSON.parse(response);
+        this.attachmentList.push(responsePath);
+  
       
-
+      
 
       this.newPet.profileImage = "assets/upload/" + this.attachmentList[0].uploadname
       this.attachmentList = []
