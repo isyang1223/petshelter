@@ -34,8 +34,14 @@ export class NewpetComponent implements OnInit {
     private http: HttpClient
   ) {
     this.uploader.onCompleteItem = (item:any, response:any, status:any, headers:any) => {
-      var responsePath = JSON.parse(response);
-        this.attachmentList.push(responsePath);
+      console.log(this.uploader.queue[0]._xhr.response)
+      var test = JSON.parse(this.uploader.queue[0]._xhr.response);
+      console.log(test.uploadname)
+      console.log(item);
+      console.log(response)
+      console.log(status);
+      console.log(headers);
+      this.attachmentList.push(JSON.parse(this.uploader.queue[0]._xhr.response).uploadname);
   
       
       

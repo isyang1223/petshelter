@@ -512,8 +512,14 @@ var NewpetComponent = /** @class */ (function () {
         this.uploader = new ng2_file_upload_1.FileUploader({ url: url });
         this.attachmentList = [];
         this.uploader.onCompleteItem = function (item, response, status, headers) {
-            var responsePath = JSON.parse(response);
-            _this.attachmentList.push(responsePath);
+            console.log(_this.uploader.queue[0]._xhr.response);
+            var test = JSON.parse(_this.uploader.queue[0]._xhr.response);
+            console.log(test.uploadname);
+            console.log(item);
+            console.log(response);
+            console.log(status);
+            console.log(headers);
+            _this.attachmentList.push(JSON.parse(_this.uploader.queue[0]._xhr.response).uploadname);
             _this.newPet.profileImage = "assets/upload/" + _this.attachmentList[0].uploadname;
             _this.attachmentList = [];
             console.log("*******************");
