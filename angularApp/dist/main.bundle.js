@@ -514,12 +514,12 @@ var NewpetComponent = /** @class */ (function () {
         this.uploader.onCompleteItem = function (item, response, status, headers) {
             console.log(_this.uploader.queue[0]._xhr.response);
             var test = JSON.parse(_this.uploader.queue[0]._xhr.response);
-            console.log(test.uploadname);
+            console.log(test);
             console.log(item);
             console.log(response);
             console.log(status);
             console.log(headers);
-            _this.attachmentList.push(JSON.parse(_this.uploader.queue[0]._xhr.response).uploadname);
+            _this.attachmentList.push(test);
             _this.newPet.profileImage = "assets/upload/" + _this.attachmentList[0].uploadname;
             _this.attachmentList = [];
             console.log("*******************");
